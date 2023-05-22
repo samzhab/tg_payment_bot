@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Copyright (c) 2021 Samuel Y. Ayele
 require 'telegram/bot'
 require 'minitest/autorun'
 require 'yaml'
@@ -14,51 +17,59 @@ class TelegramPaymentBotTest < MiniTest::Test
   end
 
   def test_start_command
-        stub_request(:post, "https://api.telegram.org/botYOUR_BOT_TOKEN/sendMessage").
-   with(
-     body: {"chat_id"=>"123", "from"=>{"first_name"=>"John", "id"=>"123"}, "text"=>"/start"},
-     headers: {
- 	  'Accept'=>'*/*',
- 	  'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
- 	  'Content-Type'=>'application/x-www-form-urlencoded',
- 	  'User-Agent'=>'Faraday v2.7.4'
-     }).
-   to_return(status: 200, body: { 'result' => { 'text' => 'Hello, John! Welcome to the payment bot.'} }.to_json, headers: {})
+    stub_request(:post, 'https://api.telegram.org/botYOUR_BOT_TOKEN/sendMessage')
+      .with(
+        body:    { 'chat_id' => '123', 'from' => { 'first_name' => 'John', 'id' => '123' },
+'text' => '/start' },
+        headers: {
+          'Accept'          => '*/*',
+          'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'Content-Type'    => 'application/x-www-form-urlencoded',
+          'User-Agent'      => 'Faraday v2.7.4'
+        }
+      )
+      .to_return(status: 200, body: { 'result' => { 'text' => 'Hello, John! Welcome to the payment bot.' } }.to_json, headers: {})
 
-
-    response = @bot.api.send_message(chat_id: 123, text: '/start', from: { id: 123, first_name: 'John' })
+    response = @bot.api.send_message(chat_id: 123, text: '/start',
+                                     from: { id: 123, first_name: 'John' })
     assert_equal 'Hello, John! Welcome to the payment bot.', response['result']['text']
   end
 
   def test_pay_command
-        stub_request(:post, "https://api.telegram.org/botYOUR_BOT_TOKEN/sendMessage").
-       with(
-         body: {"chat_id"=>"123", "from"=>{"first_name"=>"John", "id"=>"123"}, "text"=>"/pay"},
-         headers: {
-     	  'Accept'=>'*/*',
-     	  'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-     	  'Content-Type'=>'application/x-www-form-urlencoded',
-     	  'User-Agent'=>'Faraday v2.7.4'
-         }).
-       to_return(status: 200, body: { 'result' => { 'text' => 'Please provide payment details.' } }.to_json, headers: {})
+    stub_request(:post, 'https://api.telegram.org/botYOUR_BOT_TOKEN/sendMessage')
+      .with(
+        body:    { 'chat_id' => '123', 'from' => { 'first_name' => 'John', 'id' => '123' },
+'text' => '/pay' },
+        headers: {
+          'Accept'          => '*/*',
+          'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'Content-Type'    => 'application/x-www-form-urlencoded',
+          'User-Agent'      => 'Faraday v2.7.4'
+        }
+      )
+      .to_return(status: 200, body: { 'result' => { 'text' => 'Please provide payment details.' } }.to_json, headers: {})
 
-    response = @bot.api.send_message(chat_id: 123, text: '/pay', from: { id: 123, first_name: 'John' })
+    response = @bot.api.send_message(chat_id: 123, text: '/pay',
+                                     from: { id: 123, first_name: 'John' })
     assert_equal 'Please provide payment details.', response['result']['text']
   end
 
   def test_unknown_command
-        stub_request(:post, "https://api.telegram.org/botYOUR_BOT_TOKEN/sendMessage").
-       with(
-         body: {"chat_id"=>"123", "from"=>{"first_name"=>"John", "id"=>"123"}, "text"=>"/unknown"},
-         headers: {
-     	  'Accept'=>'*/*',
-     	  'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-     	  'Content-Type'=>'application/x-www-form-urlencoded',
-     	  'User-Agent'=>'Faraday v2.7.4'
-         }).
-       to_return(status: 200, body: { 'result' => { 'text' => "I'm sorry, but I don't understand." } }.to_json, headers: {})
+    stub_request(:post, 'https://api.telegram.org/botYOUR_BOT_TOKEN/sendMessage')
+      .with(
+        body:    { 'chat_id' => '123', 'from' => { 'first_name' => 'John', 'id' => '123' },
+'text' => '/unknown' },
+        headers: {
+          'Accept'          => '*/*',
+          'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'Content-Type'    => 'application/x-www-form-urlencoded',
+          'User-Agent'      => 'Faraday v2.7.4'
+        }
+      )
+      .to_return(status: 200, body: { 'result' => { 'text' => "I'm sorry, but I don't understand." } }.to_json, headers: {})
 
-    response = @bot.api.send_message(chat_id: 123, text: '/unknown', from: { id: 123, first_name: 'John' })
+    response = @bot.api.send_message(chat_id: 123, text: '/unknown',
+                                     from: { id: 123, first_name: 'John' })
     assert_equal "I'm sorry, but I don't understand.", response['result']['text']
   end
 
@@ -71,5 +82,4 @@ class TelegramPaymentBotTest < MiniTest::Test
   #       assert_nil response
   #   end
   # end
-
 end
