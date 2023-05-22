@@ -1,6 +1,6 @@
 ## Telegram Payment Bot
 
-![temporary logo](https://bt-strike.s3-us-west-2.amazonaws.com/images/ruby.gif 'bt-strike temporary logo')
+![temporary logo](https://imagesmisc.s3.eu-west-3.amazonaws.com/ruby-rubies.gif 'telegram_payment_bot temporary logo')
 
 A ruby based Telegram Bot that has payment, receipt and other features.
 
