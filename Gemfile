@@ -11,4 +11,5 @@ gem 'byebug'
 gem 'rubocop'
 gem 'rubocop-performance'
 gem 'rubocop-rails'
-gem telegram-bot-ruby
+gem 'telegram-bot-ruby'
+
