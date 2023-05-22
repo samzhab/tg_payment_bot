@@ -12,4 +12,4 @@ gem 'rubocop'
 gem 'rubocop-performance'
 gem 'rubocop-rails'
 gem 'telegram-bot-ruby'
-
+gem 'webmock', require: false
